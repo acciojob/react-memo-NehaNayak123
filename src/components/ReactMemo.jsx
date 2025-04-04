@@ -1,36 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
-const Skill = React.memo(({ name }) => <li>{name}</li>);
+const ReactMemo = () => {
+    const [list, setlist] = useState('')
+   const [appendList, setappendList] =useState([])
 
-function ReactMemo() {
-  const [input, setInput] = useState('');
-  const [skills, setSkills] = useState([]);
-
-  const addSkill = () => {
-    if (input.trim().length > 5) {
-      setSkills([...skills, input]);
-      setInput('');
+    const setListHandler = (e)=>{
+         setlist(e.target.value)
     }
-  };
+
+    const addHandler =(e)=>{
+        e.preventDefault()
+        if(list.trim() ==='') return ;
+        if(list.length<5){
+          return  alert('enter at list 5 charecter')
+        }
+    
+        setappendList((prev)=>[...prev , list])
+        setlist('')
+    }
 
   return (
-    <div className="react-memo-section">
-      <h2>React Memo testing</h2>
-      <input
-        type="text"
-        placeholder="Enter a skill"
-        className="skill-input"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <button className="add-skill-btn" onClick={addSkill}>Add Skill</button>
-      <ul>
-        {skills.map((skill, i) => (
-          <Skill key={i} name={skill} />
-        ))}
-      </ul>
+    <div>
+        <h1>React.memo</h1>
+        <input type='text' value={list} onChange={setListHandler}/>
+        <button onClick={addHandler}>Add Skill</button>
+          <ul>
+            {
+                appendList.map((items , index)=>{
+                    return <li key={index}>{items}</li>
+                })
+            }
+          </ul>
     </div>
-  );
+  )
 }
 
-export default ReactMemo;
+export default React.memo(ReactMemo);
