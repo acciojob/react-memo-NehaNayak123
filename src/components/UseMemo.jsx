@@ -1,27 +1,34 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState } from 'react';
 
-const UseMemo = () => {
+function UseMemo() {
   const [count, setCount] = useState(0);
+  const [todos, setTodos] = useState([]);
 
-  const result = useMemo(() => {
-    return count * 2;
-  }, [count]);
-
-  const onIncrease = () => {
-    setCount(count + 1);
+  const expensiveCalculation = (num) => {
+    for (let i = 0; i < 100000000; i++) {}
+    return num * 2;
   };
+
+  const memoizedValue = useMemo(() => expensiveCalculation(count), [count]);
+
+  const addTodo = () => {
+    setTodos([...todos, 'New todo']);
+  };
+
   return (
-    <div>
-      <div>
-        <span>Count:{count}</span>
-        <button onClick={onIncrease}>+</button>
-      </div>
-      <h2>Expensive Calculation</h2>
-      {result}
+    <div className="use-memo-section">
+      <h2>Use Memo testing</h2>
+      <button className="add-todo-btn" onClick={addTodo}>Add todo</button>
+      <ul>
+        {todos.map((todo, index) => (
+          <li key={index}>{todo}</li>
+        ))}
+      </ul>
+      <p>Count: {count}</p>
+      <p>Double: {memoizedValue}</p>
+      <button className="increment-btn" onClick={() => setCount(count + 1)}>Increment</button>
     </div>
   );
-};
-
-
+}
 
 export default UseMemo;
