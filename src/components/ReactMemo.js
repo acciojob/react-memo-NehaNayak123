@@ -1,15 +1,20 @@
-// ReactMemo.js
-import React from "react";
+import React, { useState } from 'react';
 
-const TodoList = React.memo(({ todos }) => {
-  console.log("Rendering TodoList...");
+const ReactMemo = React.memo(({ addCustomTodo }) => {
+  const [input, setInput] = useState('');
+
   return (
-    <ul>
-      {todos.map((todo, idx) => (
-        <li key={idx}>{todo}</li>
-      ))}
-    </ul>
+    <div>
+      <h2>React Memo testing</h2>
+      <input
+        type="text"
+        placeholder="Enter a skill"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      <button onClick={() => addCustomTodo(input)}>Add Skill</button>
+    </div>
   );
 });
 
-export default TodoList;
+export default ReactMemo;
