@@ -15,7 +15,7 @@ function ReactMemo() {
 
   return (
     <div>
-      <h2>React Memo testing</h2>
+      <h2>React.memo</h2>
       <input
         type="text"
         placeholder="Enter a skill"

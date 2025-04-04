@@ -17,8 +17,9 @@ function UseMemo() {
 
   return (
     <div>
-      <h2>Use Memo testing</h2>
-      <button onClick={addTodo}>Add todo</button>
+      <h2>React.useMemo</h2>
+      <h3>My todos</h3>
+      <button onClick={addTodo}>New todo</button>
       <ul>
         {todos.map((todo, index) => (
           <li key={index}>{todo}</li>
@@ -26,10 +27,11 @@ function UseMemo() {
       </ul>
 
       <p>Count: {count}</p>
-      <p>Double: {memoizedValue}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={() => setCount(count + 1)}>+</button>
+      <h4>Expensive Calculation</h4>
+      <p> {memoizedValue}</p>
     </div>
   );
-}
 
+}
 export default UseMemo;
